@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSRTC Bus Pass | Online Application</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- General Resets & Body Styling --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* --- Main Form Container (Card) --- */
+        .form-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* --- Form Header --- */
+        .form-header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .form-header img {
+            width: 90px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .form-header h1 {
+            color: #c0392b; /* APSRTC Red */
+            font-size: 1.8em;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        /* --- Section Titles --- */
+        .section-title {
+            color: #34495e;
+            font-size: 1.25em;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            font-size: 1.1em;
+            color: #ffffff;
+            background-color: #c0392b;
+            padding: 6px;
+            border-radius: 5px;
+            margin-right: 12px;
+        }
+
+
+        /* --- Grid Layout for Form Fields --- */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* --- Input Groups & Fields --- */
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-group label {
+            display: block;
+            color: #34495e;
+            font-weight: 500;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+
+        .input-field, .input-field-date {
+            width: 100%;
+            padding: 12px 15px 12px 45px; /* Padding for icon */
+            border: 1px solid #dce1e4;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95em;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field::placeholder, .input-field-date::placeholder {
+            color: #95a5a6;
+        }
+        
+        .input-group .icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            transition: color 0.3s ease;
+        }
+        
+        .input-field:focus, .input-field-date:focus {
+            outline: none;
+            border-color: #c0392b;
+            box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.15);
+        }
+        
+        .input-field:focus + .icon, .input-field-date:focus + .icon {
+            color: #c0392b;
+        }
+        
+        /* Special handling for date input placeholder */
+        .input-field-date::-webkit-calendar-picker-indicator {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            opacity: 0.6;
+        }
+
+        /* --- Custom Gender Radio Buttons --- */
+        .gender-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            height: 100%;
+        }
+        .gender-group input[type="radio"] {
+            display: none;
+        }
+        .gender-group .gender-label {
+            padding: 11px 25px;
+            border: 1px solid #dce1e4;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #34495e;
+            font-size: 0.95em;
+        }
+        .gender-group input[type="radio"]:checked + .gender-label {
+            background-color: #c0392b;
+            color: #ffffff;
+            border-color: #c0392b;
+        }
+
+        /* --- Submit Button --- */
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #c0392b;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 35px;
+        }
+        .submit-btn:hover {
+            background: #a93226;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(192, 57, 43, 0.2);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-container {
+                padding: 25px;
+            }
+            .form-header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-header">
+            <!-- LOGO IS NOW EMBEDDED DIRECTLY IN THE CODE -->
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANwAAADcCAMAAAAshD+zAAAAKlBMVEX////AADMAAP8AAM3/AMwzM2YzM8z/zDP/zMwAAP8zM//MzP/M/8zMzMyZmbjJAAABvElEQVR4nO3dy27CMBBA0bAYe09x/ys9LWpJMgnTCEqdT3u/v485MhGZxzmd6gUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALh/9m58c/v2Wk7j+bZ+yO7q9pL8XJLPn/L7fO4kL3+5pT8Xh0m4pP+T9y/nLsl/3Xb5POfbtdt9s9e3+83uS/6vdt/OH2NJvw/uS/ln5w8zks6f2k36c+7X6u90P+Wb+bM14L/ZbvN7h88n/Tnz/p2n+zP+v8l3c5v0l85b/9Ld1G1t7bJ/J/s5T833h32eSPrV+f5k/iS/dZ/k+6H+h+l/of5b/pP0Pz3/Tfqfni/1Pz1f6n96vtT/9Hy1/+n5av/T8wWv+yX9eX0W27V5yqt8p3zT94T3nS/r/Z3uW/mX+zM98n4n27l9t7e2dJLWbW1t7TLdpftf1s7f5P29k/TzV5fX7mZ7m32dJPl65r3p+/6v6V/0fKkn+y/aT/5k/uH2I/sP7t/sH8h+lP4E/Z/2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+1D3tFSM57yM3xAAAAABJRU5ErkJggg==" alt="APSRTC Logo">
+            <h1>APSRTC Bus Pass Application</h1>
+        </div>
+
+        <form action="#" method="POST">
+            <div class="form-grid">
+                <!-- Personal Details Section -->
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" class="input-field" placeholder="Enter your full name" required>
+                    <i class="icon fas fa-user"></i>
+                </div>
+                <div class="input-group">
+                    <label for="father_name">Father's Name</label>
+                    <input type="text" id="father_name" name="father_name" class="input-field" placeholder="Enter your father's name" required>
+                    <i class="icon fas fa-user-shield"></i>
+                </div>
+                <div class="input-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="text" id="dob" name="dob" class="input-field-date" placeholder="dd-mm-yyyy" required onfocus="(this.type='date')" onblur="(if(!this.value) this.type='text')">
+                    <i class="icon fas fa-calendar-alt"></i>
+                </div>
+                <div class="input-group">
+                    <label>Gender</label>
+                    <div class="gender-group">
+                        <input type="radio" id="male" name="gender" value="male" checked>
+                        <label for="male" class="gender-label">Male</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female" class="gender-label">Female</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-address-card"></i>
+                <h3>Contact & Address</h3>
+            </div>
+            
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="aadhar">Aadhar Number</label>
+                    <input type="text" id="aadhar" name="aadhar" class="input-field" placeholder="XXXX XXXX XXXX" pattern="\d{12}" title="12-digit Aadhar number" required>
+                    <i class="icon fas fa-id-card"></i>
+                </div>
+                <div class="input-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" class="input-field" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                    <i class="icon fas fa-mobile-alt"></i>
+                </div>
+                <div class="input-group full-width">
+                    <label for="email">Email ID</label>
+                    <input type="email" id="email" name="email" class="input-field" placeholder="you@example.com" required>
+                    <i class="icon fas fa-envelope"></i>
+                </div>
+                <div class="input-group full-width">
+                    <label for="address">Full Address</label>
+                    <textarea id="address" name="address" class="input-field" rows="3" placeholder="Enter your permanent address" style="padding-top: 12px; resize: vertical;" required></textarea>
+                    <i class="icon fas fa-map-marker-alt" style="top: 20px;"></i>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-bus-alt"></i>
+                <h3>Pass Details</h3>
+            </div>
+            
+            <div class="form-grid">
+                 <div class="input-group">
+                    <label for="source">From (Source)</label>
+                    <select id="source" name="source" class="input-field" required>
+                        <option value="" disabled selected>Select Source</option>
+                        <option value="visakhapatnam">Visakhapatnam</option>
+                        <option value="vijayawada">Vijayawada</option>
+                        <option value="guntur">Guntur</option>
+                        <option value="tirupati">Tirupati</option>
+                        <option value="kurnool">Kurnool</option>
+                    </select>
+                    <i class="icon fas fa-location-arrow"></i>
+                </div>
+                 <div class="input-group">
+                    <label for="destination">To (Destination)</label>
+                    <select id="destination" name="destination" class="input-field" required>
+                        <option value="" disabled selected>Select Destination</option>
+                        <option value="visakhapatnam">Visakhapatnam</option>
+                        <option value="vijayawada">Vijayawada</option>
+                        <option value="guntur">Guntur</option>
+                        <option value="tirupati">Tirupati</option>
+                        <option value="kurnool">Kurnool</option>
+                    </select>
+                    <i class="icon fas fa-map-pin"></i>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Application</button>
+        </form>
+    </div>
+
+</body>
+</html>
